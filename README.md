@@ -176,13 +176,6 @@ Required Supabase tables:
 - **Professional UI**: Glassmorphism, animations, responsive design
 - **Production Ready**: Authentication, database, error handling
 - **Developer Friendly**: Clean code, modular components, comprehensive documentation
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## 🤝 Contributing
-
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 ---
