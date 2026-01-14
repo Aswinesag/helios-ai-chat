@@ -329,12 +329,6 @@ function App() {
 
   // API call function
   const callAPI = async () => {
-    const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY
-    
-    if (!apiKey) {
-      throw new Error('API key is missing. Please check your .env file.')
-    }
-
     const messages = []
     
     // Add conversation history
@@ -368,24 +362,21 @@ function App() {
     }
 
     try {
-      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${import.meta.env.VITE_OPENROUTER_API_KEY}`,
           'Content-Type': 'application/json',
-          'HTTP-Referer': window.location.origin,
-          'X-Title': 'Helios Chat App'
         },
         body: JSON.stringify(requestBody)
       })
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}))
-        throw new Error(`API Error: ${response.status} - ${errorData.error?.message || response.statusText}`)
+        throw new Error(errorData.error || `API Error: ${response.status}`)
       }
 
       const data = await response.json()
-      return data.choices[0].message.content
+      return data.content
     } catch (err) {
       throw new Error(err.message || 'Failed to get response from API')
     }
